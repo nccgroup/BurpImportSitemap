@@ -1,9 +1,24 @@
 # Import To Sitemap Extension
 
-Burp Extension to import [wstalker](https://github.com/nccgroup/wstalker) CSV file or [ZAP](ZAP.md) export file into Burp Sitemap.
+Import To Sitemap is a [Burp Suite](https://portswigger.net/burp) Extension to import [wstalker](https://github.com/nccgroup/wstalker) CSV file or [ZAP](ZAP.md) export file into Burp Sitemap. It also includes a contextual menu to send request/response items from any tab to the sitemap.
+
+## License
+
+Released as open source by NCC Group Plc - https://www.nccgroup.com/
+
+Developed by Jose Selvi, jose dot selvi at nccgroup dot com
+
+https://github.com/nccgroup/BurpImportSitemap
+
+Released under AGPL see LICENSE for more information
+
+## Compile or Download
+
+To use it, you can compile your own jar file from the source code by running `gradle fatJar`. You can also download the jar file that was already compiled for you from [here](https://github.com/nccgroup/BurpImportSitemap/releases/download/20200505/import-sitemap.jar).
+
+## Using Import to Sitemap Extension 
 
 Once the extension has been loaded into Burp, an additional tab called "Import Sitemap" is added. This new tab has a number of buttons to select and load the CSV file.
-
 
 ![Load CSV](img/load.png "Logo Title Text 1")
 
