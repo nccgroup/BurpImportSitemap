@@ -10,7 +10,7 @@ Developed by Jose Selvi [![Twitter Follow](https://img.shields.io/twitter/follow
 
 https://github.com/nccgroup/BurpImportSitemap
 
-Released under AGPL see LICENSE for more information
+Released under AGPL see [LICENSE](LICENSE) for more information
 
 ## Compile or Download
 
