@@ -6,6 +6,9 @@ repositories {
 
 dependencies {
     compile 'net.portswigger.burp.extender:burp-extender-api:2.1'
+    
+    // https://github.com/sdstoehr/har-reader
+    compile group: 'de.sstoehr', name: 'har-reader', version: '2.1.10'
 }
 
 task fatJar(type: Jar) {

@@ -1,40 +1,37 @@
 /*
-Released as open source by NCC Group Plc - http://www.nccgroup.com/
-
-Developed by Jose Selvi, jose dot selvi at nccgroup dot com
-
-https://github.com/nccgroup/BurpImportSitemap
-
-Released under AGPL see LICENSE for more information
-*/
+ * Released as open source by NCC Group Plc - http://www.nccgroup.com/
+ *
+ * Developed by
+ * - Jose Selvi, jose, dot selvi at nccgroup dot com
+ * - Stefan Kunz, https://github.com/kunzstef
+ *
+ * https://github.com/nccgroup/BurpImportSitemap
+ * Released under AGPL see LICENSE for more information
+ */
 
 package wstalker.ui;
 
+import java.awt.Desktop;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URISyntaxException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Desktop;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import burp.IBurpExtenderCallbacks;
 import burp.IHttpRequestResponse;
 import burp.IParameter;
-
 import wstalker.WStalker;
 import wstalker.imports.WSImport;
 import wstalker.imports.WSRequestResponse;
@@ -55,10 +52,10 @@ public class WSPanel extends JPanel {
 
         // Create the Grid
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[] { 0, 1, 1, 0 };
-        gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-        gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-        gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+        gridBagLayout.columnWidths = new int[]{0, 1, 1, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         this.setLayout(gridBagLayout);
 
         // Add NCC Logo Image
@@ -114,6 +111,7 @@ public class WSPanel extends JPanel {
 
         JButton btnImportWStalker = new JButton("Import WStalker CSV");
         btnImportWStalker.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<IHttpRequestResponse> rs = wsimport.importWStalker();
                 sendToSitemap(rs);
@@ -137,6 +135,7 @@ public class WSPanel extends JPanel {
 
         JButton btnImportZAP = new JButton("Import OWASP ZAP");
         btnImportZAP.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<IHttpRequestResponse> rs = wsimport.importZAP();
                 sendToSitemap(rs);
@@ -147,6 +146,30 @@ public class WSPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridy++;
         this.add(btnImportZAP, gbc);
+
+        //
+        // HTTP Archive (HAR)
+        //
+
+        JLabel lblImportHAR = new JLabel("Import HTTP Archive Format");
+        gbc.insets = new Insets(20, 0, 5, 5);
+        gbc.gridx = 1;
+        gbc.gridy++;
+        this.add(lblImportHAR, gbc);
+
+        JButton btnImportHAR = new JButton("Import HAR");
+        btnImportHAR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<IHttpRequestResponse> rs = wsimport.importHAR();
+                sendToSitemap(rs);
+            }
+        });
+        gbc.insets = new Insets(0, 0, 10, 0);
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy++;
+        this.add(btnImportHAR, gbc);
 
         //
         // GO TO GITHUB
@@ -160,23 +183,24 @@ public class WSPanel extends JPanel {
 
         JButton btnGoToGithub = new JButton("Open extension homepage");
         btnGoToGithub.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				openWebpage(WStalker.Url);
-			}
-		});
-		gbc.insets = new Insets(0, 0, 10, 0);
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy++;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openWebpage(WStalker.Url);
+            }
+        });
+        gbc.insets = new Insets(0, 0, 10, 0);
+        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridy++;
         this.add(btnGoToGithub, gbc);
     }
 
-    public void sendToSitemap(ArrayList<IHttpRequestResponse> rs) {    
+    public void sendToSitemap(ArrayList<IHttpRequestResponse> rs) {
         boolean doTrick = this.chkFakeParam.isSelected();
         this.sendToSitemap(rs, doTrick);
     }
 
-    public void sendToSitemap(ArrayList<IHttpRequestResponse> rs, boolean doTrick) {    
+    public void sendToSitemap(ArrayList<IHttpRequestResponse> rs, boolean doTrick) {
 
         Iterator<IHttpRequestResponse> i = rs.iterator();
         while (i.hasNext()) {
@@ -185,7 +209,7 @@ public class WSPanel extends JPanel {
         }
     }
 
-    public void sendToSitemap(IHttpRequestResponse r) {    
+    public void sendToSitemap(IHttpRequestResponse r) {
         boolean doTrick = this.chkFakeParam.isSelected();
         this.sendToSitemap(r, doTrick);
     }
@@ -208,27 +232,27 @@ public class WSPanel extends JPanel {
 
     // Borrowed from https://github.com/nccgroup/BurpSuiteLoggerPlusPlus/
     private static void openWebpage(URI uri) {
-		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-			try {
-				desktop.browse(uri);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(uri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     // Borrowed from https://github.com/nccgroup/BurpSuiteLoggerPlusPlus/
-	private static void openWebpage(String url) {
-		try {
-			openWebpage((new URL(url)).toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+    private static void openWebpage(String url) {
+        try {
+            openWebpage((new URL(url)).toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
-    
+
     // Requirement
     private static final long serialVersionUID = 5843153017285180474L;
 }
