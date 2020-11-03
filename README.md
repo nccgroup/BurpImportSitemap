@@ -1,12 +1,12 @@
 # Import To Sitemap Extension
 
-Import To Sitemap is a [Burp Suite](https://portswigger.net/burp) Extension to import [wstalker](https://github.com/nccgroup/wstalker) CSV file or [ZAP](ZAP.md) export file into Burp Sitemap. It also includes a contextual menu to send request/response items from any tab to the sitemap.
+Import To Sitemap is a [Burp Suite](https://portswigger.net/burp) Extension to import [wstalker](https://github.com/nccgroup/wstalker) CSV file, [ZAP](ZAP.md) export file or HTTP Archive files (HAR) into Burp Sitemap. It also includes a contextual menu to send request/response items from any tab to the sitemap.
 
 ## License
 
 Released as open source by NCC Group Plc - https://www.nccgroup.com/
 
-Developed by Jose Selvi [![Twitter Follow](https://img.shields.io/twitter/follow/JoseSelvi?style=social)](https://twitter.com/JoseSelvi/)
+Developed by Jose Selvi [![Twitter Follow](https://img.shields.io/twitter/follow/JoseSelvi?style=social)](https://twitter.com/JoseSelvi/), [Stefan Kunz](https://github.com/kunzstef)
 
 https://github.com/nccgroup/BurpImportSitemap
 
